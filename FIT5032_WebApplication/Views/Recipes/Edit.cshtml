@@ -1,0 +1,158 @@
+﻿@model FIT5032_WebApplication.Models.Recipe
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AboutLayout.cshtml";
+}
+
+<h2>Edit</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .whole-form {
+            display: block;
+            margin: auto auto;
+            padding: 20px;
+        }
+
+        input, textarea, .form-group {
+            max-width: 100%;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-lg-2"></div>
+
+        <div class="whole-form col-lg-8">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Path)
+            @Html.HiddenFor(model => model.Status)
+            @Html.HiddenFor(model => model.DateCreated)
+            @Html.HiddenFor(model => model.UserId)
+
+            <div class="form-group">
+                @Html.Label("Recipe Name")
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Meal Type")
+                @Html.DropDownListFor(model => model.MealType, new List<SelectListItem>{
+               new SelectListItem { Text = "Breakfast", Value = "Breakfast" },
+               new SelectListItem { Text = "Lunch", Value = "Lunch" }, new SelectListItem { Text = "Dinner", Value = "Dinner" } })
+            </div>
+            <hr />
+
+            <div class="form-group">
+                @Html.Label("Calories (cal)")
+                @Html.EditorFor(model => model.Cal, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Cal, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Carbs (g)")
+                @Html.EditorFor(model => model.Carbs, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Carbs, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Protein (g)")
+                @Html.EditorFor(model => model.Protein, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Protein, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Fat (g)")
+                @Html.EditorFor(model => model.Fat, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Fat, "", new { @class = "text-danger" })
+            </div>
+            <hr />
+
+            <div class="form-group">
+                @Html.Label("Preperation time (minutes)")
+                @Html.EditorFor(model => model.PrepTime, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PrepTime, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Number of servings")
+                @Html.EditorFor(model => model.Servings, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Servings, "", new { @class = "text-danger" })
+            </div>
+            <hr />
+
+            <div class="form-group">
+                @Html.Label("Ingredients (Put each ingredient on its own line)")
+                @Html.EditorFor(model => model.Ingredients, new { htmlAttributes = new { @class = "form-control", @id = "IngredientsText" } })
+                @Html.ValidationMessageFor(model => model.Ingredients, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Directions")
+                @Html.EditorFor(model => model.Instructions, new { htmlAttributes = new { @class = "form-control", @id = "InstructionsText" } })
+                @Html.ValidationMessageFor(model => model.Instructions, "", new { @class = "text-danger" })
+            </div>
+            <hr />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        tinymce.init({
+            selector: '#IngredientsText',
+            branding: false,
+            menubar: false,
+            toolbar: false,
+            elementpath: false
+        });
+
+        tinymce.init({
+            selector: '#InstructionsText',
+            branding: false,
+            menubar: false,
+            toolbar: false,
+            elementpath: false
+        });
+    </script>
+}

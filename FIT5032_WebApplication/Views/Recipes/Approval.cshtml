@@ -1,0 +1,82 @@
+﻿@model IEnumerable<FIT5032_WebApplication.Models.Recipe>
+
+@{
+    ViewBag.Title = "Approval";
+    Layout = "~/Views/Shared/_AboutLayout.cshtml";
+}
+
+<h2>Approval</h2>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        h1 {
+            font-size: 0.7em;
+            padding: 0;
+            font-weight: normal;
+        }
+
+        h2 {
+            font-size: 2em;
+        }
+
+        .text-group {
+            font-size: 1.5em;
+        }
+
+        .text-lot {
+
+        }
+
+        .raw-group {
+            font-size: 0.1em;
+        }
+
+        p {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col-sm-2">
+                    <img class="img-thumbnail" src='@Url.Content("~/Uploads/" + item.Path)' />
+                </td>
+                <td class="text-group">
+                    <div class="col-sm-4">
+                        <div>
+                            Name: <p>@Html.Raw(item.Name)</p>
+                        </div>
+                        <br />
+                        <div>
+                            <p>Cal: @Html.Raw(item.Cal)</p>
+                        </div>
+                        <div>
+                            <p>Carbs: @Html.Raw(item.Carbs) Protein: @Html.Raw(item.Protein) Fat: @Html.Raw(item.Fat)</p>
+                        </div>
+                    </div>
+                    <div class="text-lot">
+                        <div class="col-sm-3">
+                            Ingredients:<h2>@Html.Raw(item.Ingredients)</h2>
+                        </div>
+                        <div class="col-sm-3">
+                            Instructions:<h2>@Html.Raw(item.Instructions)</h2>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="submit" value="Approve" class="btn btn-default" />
+                        <input type="submit" value="Unapprove" class="btn btn-default" />
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+</body>
+</html>

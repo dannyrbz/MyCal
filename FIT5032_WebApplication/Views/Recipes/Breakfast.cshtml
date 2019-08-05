@@ -1,0 +1,59 @@
+﻿@model IEnumerable<FIT5032_WebApplication.Models.Recipe>
+
+
+@{
+    ViewBag.Title = "Recipes";
+    Layout = "~/Views/Shared/RecipeLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+
+        .breakfast .lunch .dinner {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+        }
+
+        .type-link {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="recipe-whole col-sm-12">
+        <div class="type-link col-sm-12">
+            <ul class="nav navbar-nav col-lg-12">
+                <li>@Html.ActionLink("Breakfast", "Breakfast", "Recipes")</li>
+                <li>@Html.ActionLink("Lunch", "Lunch", "Recipes")</li>
+                <li>@Html.ActionLink("Dinner", "Dinner", "Recipes")</li>
+            </ul>
+        </div>
+        <div class="recipe-list">
+            <div class="breakfast">
+                <h2>Breakfast Recipes</h2>
+                <hr />
+                @foreach (var item in Model)
+                {
+                    if (item.MealType == "Breakfast")
+                    {
+                        <div class="col-sm-4">
+                            <a href='@Url.Action("Details", "Recipes", new { id = item.Id })'>
+                                <img class="img-thumbnail" src='@Url.Content("~/Uploads/" + item.Path)' style="height:200px" />
+                            </a>
+                            <br />
+                            <p class="text-center">@Html.DisplayFor(modelItem => item.Name)</p>
+                            <br />
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

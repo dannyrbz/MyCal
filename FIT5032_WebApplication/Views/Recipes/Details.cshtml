@@ -1,0 +1,102 @@
+﻿@model FIT5032_WebApplication.Models.Recipe
+@using Microsoft.AspNet.Identity
+
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AboutLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        .text-group {
+            text-align: center;
+            font: 32px Arial, sans-serif;
+            margin: auto auto;
+        }
+
+        .image {
+            padding-bottom: 20px;
+            margin: auto auto;
+            text-align: center;
+        }
+
+        .class-whole {
+            padding-top: 20px;
+        }
+        
+        .edit-delete {
+            padding-top: 20px;
+        }
+
+        .image-group {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="class-whole col-sm-12">
+        <div>
+            <div class="col-sm-6">
+                <h2>@Html.DisplayFor(model => model.Name)</h2>
+            </div>
+            <div class="edit-delete col-sm-6">
+                @if (Model.UserId == User.Identity.GetUserId())
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</li>
+                        <li>@Html.ActionLink("Delete", "Delete", new { id = Model.Id })</li>
+                    </ul>
+                }
+            </div>
+            <div class="col-sm-12">
+                <p>@Html.DisplayFor(model => model.DateCreated)</p>
+            </div>
+
+        </div>
+
+        <div class="col-sm-12">
+            <hr />
+            <div class="image col-sm-12">
+                <img class="image-group" src='@Url.Content("~/Uploads/" + Model.Path)' />
+            </div>
+
+            <div class="numberCircle">
+                <div class="text-group col-sm-3">
+                    Cal: @Html.DisplayFor(model => model.Cal) cal  
+                </div>
+                <div class="text-group col-sm-3">
+                    Carbs: @Html.DisplayFor(model => model.Carbs) g
+                </div>
+                <div class="text-group col-sm-3">
+                    Protein: @Html.DisplayFor(model => model.Protein) g
+                </div>
+                <div class="text-group col-sm-3">
+                    Fat: @Html.DisplayFor(model => model.Fat) g
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <hr />
+            </div>
+
+            <div class="col-sm-6">
+                <h2>Ingredients</h2>
+                <hr />
+                @Html.Raw(Model.Ingredients)
+            </div>
+
+            <div class="col-sm-6">
+                <h2>Directions</h2>
+                <hr />
+                @Html.Raw(Model.Instructions)
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

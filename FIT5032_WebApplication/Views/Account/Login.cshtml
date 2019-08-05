@@ -1,0 +1,80 @@
+﻿@using FIT5032_WebApplication.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_AboutLayout.cshtml";
+}
+
+
+<style>
+    .whole-form {
+        display: block;
+        margin: auto auto;
+        padding: 20px;
+    }
+
+    .form-group {
+        margin: auto auto;
+        width: 100%;
+        vertical-align: central;
+    }
+
+    .row {
+        display: inline;
+        vertical-align: middle;
+    }
+</style>
+
+<h1 class="col-lg-12" style="text-align:center">Log In</h1>
+
+<div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="whole-form col-sm-offset-2 col-sm-8">
+        <section id="loginForm" class="login-form">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group col-sm-12">
+                    @Html.Label("Email")
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <br />
+
+                <div class="form-group col-sm-12">
+                    @Html.Label("Password")
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                <div class="check-box col-sm-12">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe)
+                    </div>
+                </div>               
+                <br />
+
+                <div class="form-group col-sm-8 text-center">
+                    <input type="submit" value="Log in" class="btn btn-default" />
+                </div>
+
+                <div class="register-button col-sm-12">
+                    @Html.ActionLink("Register as a new user", "Register")
+                </div>
+                @* Enable this once you have account confirmation enabled for password reset functionality
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>*@
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<FIT5032_WebApplication.Models.Recipe>
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "MyRecipes";
+    Layout = "~/Views/Shared/_MyRecipes.cshtml";
+}
+
+<style>
+    .create {
+        padding-top: 10px;
+        font-size: 2em;
+        margin: auto auto;
+    }
+</style>
+
+
+<div class="breakfast">
+    <div class="col-sm-12">
+        <div class="col-sm-6">
+            <h2>My Recipes</h2>
+        </div>
+        <div class="type-link col-sm-6">
+            <ul class="create nav navbar-nav navbar-right col-sm-6">
+                <li>@Html.ActionLink("Add a new recipe", "Create", "Recipes")</li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="col-sm-12">
+        <hr />
+    </div>
+    <div class="col-sm-12">
+        @foreach (var item in Model)
+        {
+            if (item.UserId == User.Identity.GetUserId())
+            {
+                <div class="col-sm-4">
+                    <a href='@Url.Action("Details", "Recipes", new { id = item.Id })'>
+                        <img class="img-thumbnail" src='@Url.Content("~/Uploads/" + item.Path)' style="height:200px" />
+                    </a>
+                    <br />
+                    <p class="text-center">@Html.DisplayFor(modelItem => item.Name)</p>
+                    <br />
+                </div>
+            }
+        }
+    </div>
+</div>

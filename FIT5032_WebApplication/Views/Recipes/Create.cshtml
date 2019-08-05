@@ -1,0 +1,157 @@
+﻿@model FIT5032_WebApplication.Models.Recipe
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AboutLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .whole-form {
+            display: block;
+            margin: auto auto;
+            padding: 20px;
+        }
+
+        input, textarea {
+            max-width: 100%;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Add New Recipe</h1>
+
+    @using (Html.BeginForm("Create", "Recipes", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-lg-2"></div>
+
+        <div class="whole-form col-lg-8">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.Label("Recipe Name")
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Meal Type")
+                @Html.DropDownListFor(model => model.MealType, new List<SelectListItem>{
+               new SelectListItem { Text = "Breakfast", Value = "Breakfast" },
+               new SelectListItem { Text = "Lunch", Value = "Lunch" }, new SelectListItem { Text = "Dinner", Value = "Dinner" } })
+            </div>
+            <hr />
+
+            <div class="form-group">
+                @Html.Label("Calories (cal)")
+                @Html.TextBoxFor(model => model.Cal, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Cal, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Carbs (g)")
+                @Html.TextBoxFor(model => model.Carbs, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Carbs, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Protein (g)")
+                @Html.TextBoxFor(model => model.Protein, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Protein, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Fat (g)")
+                @Html.TextBoxFor(model => model.Fat, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Fat, "", new { @class = "text-danger" })
+            </div>
+            <hr />
+
+            <div class="form-group">
+                @Html.Label("Preperation time (minutes)")
+                @Html.TextBoxFor(model => model.PrepTime, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PrepTime, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Number of servings")
+                @Html.TextBoxFor(model => model.Servings, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Servings, "", new { @class = "text-danger" })
+            </div>
+            <hr />
+
+            <div class="form-group">
+                @Html.Label("Ingredients (Put each ingredient on its own line)")
+                @Html.EditorFor(model => model.Ingredients, new { htmlAttributes = new { @class = "form-control", @id = "IngredientsText" } })
+                @Html.ValidationMessageFor(model => model.Ingredients, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Directions")
+                @Html.EditorFor(model => model.Instructions, new { htmlAttributes = new { @class = "form-control", @id = "InstructionsText" } })
+                @Html.ValidationMessageFor(model => model.Instructions, "", new { @class = "text-danger" })
+            </div>
+            <hr />
+
+            <div class="g-recaptcha" data-sitekey="6LeyBXYUAAAAAC6ri3HBo9yXSCPkwk5QawU6Gmiy"></div>
+
+            <div class="form-group">
+                <input type="file" name="postedFile" class="btn btn-default" accept="image/jpg,image/jpeg,image/png" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+
+            </div>
+        </div>
+    }
+
+</body>
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        tinymce.init({
+            selector: '#IngredientsText',
+            branding: false,
+            menubar: false,
+            toolbar: false,
+            elementpath: false
+        });
+
+        tinymce.init({
+            selector: '#InstructionsText',
+            branding: false,
+            menubar: false,
+            toolbar: false,
+            elementpath: false       
+        });
+    </script>
+    <script src="http://www.google.com/recaptcha/api.js" type="text/javascript"></script>
+}

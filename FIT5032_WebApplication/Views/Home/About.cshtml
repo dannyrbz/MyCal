@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_AboutLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+
+        }
+        .banner {
+            height: 250px;
+        }
+        
+        .about-whole {
+            padding-top: 20px;
+        }
+
+        .about-calculator {
+            padding-top: 20px;
+        }
+
+        .equation {
+            padding-top: 20px;
+        }
+
+        p {
+            padding-left: 30px;
+            padding-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="about-whole col-sm-offset-2 col-sm-8">
+        <div class="about-mycal">
+            <h2>About MyCal</h2>
+            <p>MyCal is a health and fitness website that allows our users to calculate their estimated caloric intake for each day.</p>
+        </div>
+        <div class="about-calculator">
+            <div>
+                <h2>How does the calculator work?</h2>
+                <p>
+                    The calculator estimates your basal metabolic rate which is the total amount of calories you would require each day to support the vital functions of your body.
+                    Based on your basal metabolic rate, we multiply by...
+                </p>
+                <p>
+                    To calculate your basal metabolic rate, the calculator uses Mifflin-St Jeor's Equation.
+                    While there are many other equations out there, Mifflin-St Jeor's equation is considered the most accurate according to research.
+                </p>
+                <div class="equation"></div>
+                <h2>The equation is as follows:</h2>
+                <p>For men:</p>
+                <p>BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age(y) + 5</p>
+                <p>For women:</p>
+                <p>BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age(y) - 161</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
