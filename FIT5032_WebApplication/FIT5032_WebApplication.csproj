@@ -240,6 +240,13 @@
     <Content Include="Images\BannerPhoto.jpg" />
     <Content Include="Images\HeathyFood.jpg" />
     <Content Include="Images\HomeImage.jpg" />
+    <Content Include="Images\Screenshots\AddRecipes.jpg" />
+    <Content Include="Images\Screenshots\AddRecipes1.jpg" />
+    <Content Include="Images\Screenshots\ApproveRecipes.jpg" />
+    <Content Include="Images\Screenshots\HomePage.jpg" />
+    <Content Include="Images\Screenshots\Recipes.jpg" />
+    <Content Include="Images\Screenshots\Recipes1.jpg" />
+    <Content Include="Images\Screenshots\Recipes2.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
