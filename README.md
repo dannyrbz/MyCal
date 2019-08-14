@@ -1,4 +1,4 @@
-# MyCal
+## MyCal
 
 MyCal was the first web application I ever created, it allows users to calculate their daily intake based on their age, gender, height and weight. The calculator uses Mifflin-St Jeor’s equation to calculate 5 different recommended daily intake brackets. Users can also create/add food recipes to the database and/or view existing recipes. 
 
